@@ -19,21 +19,24 @@ export const Questions = database.define("Question", {
         type: DataTypes.JSON,
         allowNull: false,
     },
-    correct_answer: {
+    correctAnswer: {
         type: DataTypes.STRING(30),
         allowNull: false,
+        field: "correct_answer"
     },
     points: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    feedback_correct: {
+    feedbackCorrect: {
         type: DataTypes.STRING(200),
         allowNull: false,
+        field: "feedback_correct"
     },
-    feedback_incorrect: {
+    feedbackIncorrect: {
         type: DataTypes.STRING(200),
         allowNull: false,
+        field: "feedback_incorrect"
     }
 }, {
 
