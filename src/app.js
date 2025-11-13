@@ -3,7 +3,7 @@ import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 import { env } from "./config/env.js";
-import questionsRoutes from "./modules/questions/questions.routes.js";
+import { questionRouter } from "./routes/questions.routes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 export const createApp = () => {
@@ -19,7 +19,7 @@ export const createApp = () => {
         res.json({ ok: true });
     });
 
-    app.use("/questions", questionsRoutes);
+    app.use("/questions", questionRouter());
     app.use(errorHandler);
 
     return app;

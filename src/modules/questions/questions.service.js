@@ -1,11 +1,11 @@
 import { HttpError } from "../../utils/httpError.js";
-import { makeQuestionsRepoFile } from "./questions.repo.file.js";
+import { makeQuestionsRepoSequelize } from "./questions.repo.sequelize.js";
 
 export const makeQuestionsService = () => {
-    const repo = makeQuestionsRepoFile();
+    const repo = makeQuestionsRepoSequelize();
 
-    const list = async ({ q }) => {
-        return repo.findAll({ q });
+    const list = async () => {
+        return repo.findAll();
     };
 
     const get = async ({ id }) => {
