@@ -19,7 +19,7 @@ export const createApp = () => {
         res.json({ ok: true });
     });
 
-    app.use("/questions", questionRouter());
+    app.use("/questions", questionRouter);
     app.use(errorHandler);
 
     return app;
