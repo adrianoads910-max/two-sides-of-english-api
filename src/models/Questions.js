@@ -7,15 +7,34 @@ export const Questions = database.define("Question", {
         primaryKey: true,
         autoIncrement: true
     },
-
-    //Adiciona os outros parametros  text: {
-    //  type: DataTypes.STRING(200),
-    //   allowNull: false,
-    //  },
-    //  options: {
-    //    type: DataTypes.JSON,
-    //    allowNull: false,
-    // }
+    difficulty: {
+        type: DataTypes.STRING(6),
+        allowNull: false,
+    },
+    question: {
+        type: DataTypes.STRING(200),
+        allowNull: false,
+    },
+    options: {
+        type: DataTypes.JSON,
+        allowNull: false,
+    },
+    correct_answer: {
+        type: DataTypes.STRING(30),
+        allowNull: false,
+    },
+    points: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    feedback_correct: {
+        type: DataTypes.STRING(200),
+        allowNull: false,
+    },
+    feedback_incorrect: {
+        type: DataTypes.STRING(200),
+        allowNull: false,
+    }
 }, {
 
     tableName: 'questions',
