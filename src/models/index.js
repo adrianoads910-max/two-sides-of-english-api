@@ -1,3 +1,4 @@
+import { database } from "../config/database.js";
 import { env } from "../config/env.js";
 import { Questions } from "./Questions.js";
 
@@ -9,4 +10,5 @@ if (env.nodeEnv === 'development') {
         .catch(err => console.error('❌ Error when synced:', err));
 }
 
-export default models
+export { database, Questions };
+export default models;

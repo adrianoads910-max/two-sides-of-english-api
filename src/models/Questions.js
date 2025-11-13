@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { database } from "../config/database.js";
 
-export const Questions = database.define("Question", {
+export const Questions = database.define("Questions", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -39,7 +39,6 @@ export const Questions = database.define("Question", {
         field: "feedback_incorrect"
     }
 }, {
-
     tableName: 'questions',
     timestamps: true, // Adiciona createdAt e updatedAt
     underscored: true // Usa snake_case no banco (created_at)
