@@ -7,22 +7,26 @@ export const makeAnswerService = () => {
     const questionRepo = makeQuestionsRepoSequelize();
 
     const createOrUpdate = async ({ sessionId, questionId, answer }) => {
-        if (!Array.isArray(answer) || answer.length === 0) {
-            throw new HttpError(400, 'The answer must be a non-empty array');
-        }
 
-        const question = await questionRepo.findById(questionId);
+        const question = await questionRepo.findById({ id: questionId });
+
         if (!question) {
-            throw new HttpError(400, 'Question not found');
+            throw new HttpError('Question not found', 400);
         }
 
-        const invalidOptions = answer.filter(opt => !question.options.includes(opt));
-        if (invalidOptions.length > 0) {
-            throw new HttpError(400, `Invalid answer options: ${invalidOptions.join(', ')}`);
+        if (!Number.isInteger(answer)) {
+            throw new HttpError("Answer must be an integer", 400);
+        }
+
+        if (answer < 0 || answer >= question.options.length) {
+            throw new HttpError(
+                `Invalid answer index: ${answer}. Must be between 0 and ${question.options.length - 1}`,
+                400
+            );
         }
 
         return await answerRepo.upsert({ sessionId, questionId, answer });
     }
 
-    return { createOrUpdate }
+    return { createOrUpdate };
 }

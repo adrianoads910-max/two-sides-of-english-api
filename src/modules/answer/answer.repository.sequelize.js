@@ -4,29 +4,25 @@ import { Questions } from "../../models/Questions.js";
 
 export const makeAnswerRepoSequelize = () => {
     const upsert = async ({ sessionId, questionId, answer }) => {
-        const [answerRecord, created] = await Answer.upsert(
-            {
-                sessionId,
-                questionId,
-                answer
-            },
-            {
-                returning: true
-            }
+        await Answer.upsert(
+            { sessionId, questionId, answer },
+            { returning: true }
         );
 
-        const result = await Answer.findByPk(answerRecord.id, {
+        // Buscar o registro REAL após o upsert
+        const answerRecord = await Answer.findOne({
+            where: { sessionId, questionId },
             include: [
                 {
                     model: Questions,
                     as: 'question',
-                    attributes: ['text']
+                    attributes: ['question', 'options']
                 }
             ]
         });
 
-        return result.toJSON();
-    }
+        return answerRecord.toJSON();
+    };
 
     const findBySession = async (sessionId) => {
         const answers = await Answer.findAll({

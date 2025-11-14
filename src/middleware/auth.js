@@ -16,7 +16,7 @@ export const ensureAuth = (req, _res, next) => {
     }
     try {
         const payload = jwt.verify(token, env.jwtSecret);
-        req.user = { id: payload.sub };
+        req.session = { sessionId: payload.sub };
         return next();
     } catch {
         return next({ message: 'Invalid or expired token', status: 401, code: 'UNAUTHORIZED' });

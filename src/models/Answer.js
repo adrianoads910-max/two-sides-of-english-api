@@ -22,9 +22,8 @@ export const Answer = database.define('Answer', {
         }
     },
     answer: {
-        type: DataTypes.JSON,
+        type: DataTypes.NUMBER,
         allowNull: false,
-        comment: 'Array de opções selecionadas pelo usuário'
     }
 }, {
     tableName: 'answers',

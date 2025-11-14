@@ -8,7 +8,7 @@ export const makeQuestionsRepoSequelize = () => {
     }
 
     const findById = async ({ id }) => {
-        const question = await Questions.findById(id);
+        const question = await Questions.findByPk(id);
         return question ? question.toJSON() : null;
     }
 

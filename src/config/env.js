@@ -8,3 +8,4 @@ export const env = {
     corsOrigin: process.env.CORS_ORIGIN ?? '*',
     nodeEnv: process.env.NODE_ENV ?? "development"
 }
+

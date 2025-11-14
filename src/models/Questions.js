@@ -20,7 +20,7 @@ export const Questions = database.define("Questions", {
         allowNull: false,
     },
     correctAnswer: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.INTEGER, //STRING 
         allowNull: false,
         field: "correct_answer"
     },
