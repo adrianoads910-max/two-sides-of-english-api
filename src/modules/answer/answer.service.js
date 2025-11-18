@@ -25,7 +25,7 @@ export const makeAnswerService = () => {
             );
         }
 
-        return await answerRepo.upsert({ sessionId, questionId, answer });
+        return await answerRepo.create({ sessionId, questionId, answer });
     }
 
     return { createOrUpdate };

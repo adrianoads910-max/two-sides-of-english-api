@@ -3,9 +3,11 @@ import { database } from "../config/database.js";
 
 export const Questions = database.define("Questions", {
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID, // Mude para UUID
+        defaultValue: DataTypes.UUIDV4, // Adicione o gerador de UUID v4
         primaryKey: true,
-        autoIncrement: true
+        allowNull: false, // Garante que não será nulo
+        unique: true // Garante a unicidade (primaryKey já implica isso, mas é bom ser explícito)
     },
     difficulty: {
         type: DataTypes.STRING(6),
