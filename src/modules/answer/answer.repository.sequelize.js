@@ -44,8 +44,8 @@ export const makeAnswerRepoSequelize = () => {
                 {
                     model: Questions,
                     as: 'question',
-                    attributes: ['id', 'text', 'options']
-                }
+                    attributes: ['id', 'question', 'correctAnswer', 'options']
+                } //correctAnswer //question
             ],
         });
         return answers.map(a => a.toJSON());
@@ -58,8 +58,8 @@ export const makeAnswerRepoSequelize = () => {
                 {
                     model: Questions,
                     as: 'question',
-                    attributes: ['id', 'text', 'options']
-                }
+                    attributes: ['id', 'question', 'options']
+                }//text
             ]
         });
         return answer ? answer.toJSON() : null;

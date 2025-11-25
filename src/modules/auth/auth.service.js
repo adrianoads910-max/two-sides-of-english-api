@@ -6,7 +6,7 @@ export const makeAuthService = () => {
     const createSession = () => {
         const sessionId = uuidv4();
 
-        const accessToken = jwt.sign({},
+        const accessToken = jwt.sign({ sessionId },
             env.jwtSecret,
             {
                 subject: String(sessionId),
