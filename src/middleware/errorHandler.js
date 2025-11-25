@@ -7,6 +7,8 @@ export const errorHandler = (error, _request, response, _next) => {
         details: error?.details ?? null
     }
 
+    console.log({ error })
+
     return response.status(status).json(payload)
 }
 
