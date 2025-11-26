@@ -4,8 +4,19 @@ import { makeQuestionsRepoSequelize } from "./questions.repo.sequelize.js";
 export const makeQuestionsService = () => {
     const repo = makeQuestionsRepoSequelize();
 
+    // 👉 Controle aqui quantas questões deseja no quiz
+    const QUIZ_SIZE = 10;
+
     const list = async () => {
-        return repo.findAll();
+        const allQuestions = await repo.findAll();
+
+        // Embaralhar array
+        const shuffled = allQuestions.sort(() => Math.random() - 0.5);
+
+        // Escolher apenas X
+        const selected = shuffled.slice(0, QUIZ_SIZE);
+
+        return selected;
     };
 
     const get = async ({ id }) => {

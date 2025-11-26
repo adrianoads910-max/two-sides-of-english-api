@@ -1,35 +1,48 @@
-import { makeAnswerRepoSequelize } from "../answer/answer.repository.sequelize.js"
+// src/modules/results/results.service.js
+
+import { Answer } from "../../models/Answer.js";
+import { Questions } from "../../models/Questions.js";
 
 export const makeResultsService = () => {
-    const answerRepo = makeAnswerRepoSequelize()
+    const listBySession = async (sessionId) => {
 
-    const get = async ({ sessionId }) => {
-        const answers = await answerRepo.findBySession(sessionId)
+        // 1. Busca todas as respostas dessa sessão
+        const answers = await Answer.findAll({
+            where: { sessionId },
+            include: [
+                {
+                    model: Questions,
+                    as: "question",
+                    attributes: ["id", "correctAnswer"]
+                }
+            ]
+        });
 
         if (!answers || answers.length === 0) {
             return {
                 totalQuestions: 0,
                 correct: 0,
-                percentage: 0
-            }
+                percentage: 0,
+            };
         }
 
-        const totalQuestions = answers.length
+        // 2. Número total de questões respondidas
+        const totalQuestions = answers.length;
 
-        // verificar corretas
-        const correct = answers.filter(a => {
-            return a.answer === a.question.correctAnswer
-        }).length
+        // 3. Conta quantas estão corretas
+        const correct = answers.filter(
+            (item) => item.answer === item.question.correctAnswer
+        ).length;
 
-        // calcular porcentagem
-        const percentage = Math.round((correct / totalQuestions) * 100)
+        // 4. Calcula percentual
+        const percentage = Math.round((correct / totalQuestions) * 100);
 
         return {
             totalQuestions,
             correct,
-            percentage
-        }
-    }
+            percentage,
+        };
+    };
 
-    return { get }
-}
+    return { listBySession };
+};

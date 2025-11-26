@@ -5,10 +5,11 @@ export const makeAuthController = () => {
 
     const create = (_request, response, next) => {
         try {
-            const { accessToken } = service.createSession()
+            const { accessToken, sessionId } = service.createSession()
 
             return response.status(201).json({
-                accessToken
+                accessToken,
+                sessionId
             })
         } catch (error) {
             return next(error)
