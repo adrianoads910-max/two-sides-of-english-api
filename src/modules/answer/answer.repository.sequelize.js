@@ -26,9 +26,13 @@ export const makeAnswerRepoSequelize = () => {
                 {
                     model: Questions,
                     as: 'question',
+<<<<<<< Updated upstream
                     // CORREÇÃO: Havia um erro de digitação em 'feddback_incorret' -> 'feedback_incorrect'
                     // Verifique se no banco está escrito 'incorrect' ou 'incorret' mesmo.
                     attributes: ['feedback_correct', 'feedback_incorrect']
+=======
+                    attributes: ['id', 'question', 'options'] // Use 'question' se esse for o nome da coluna no model Questions
+>>>>>>> Stashed changes
                 }
             ]
         })
